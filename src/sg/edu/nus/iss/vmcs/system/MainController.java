@@ -27,16 +27,49 @@ public class MainController {
 	private MaintenanceController maintenanceCtrl;
 	private TransactionController txCtrl;
 	private StoreController       storeCtrl;
+	
+	private static MainController mainCtrl;
 
 	private String      propertyFile;
 
+//	/**
+//	 * This constructor creates an instance of MainController object.
+//	 * @param propertyFile the property file name.
+//	 */
+//	public MainController(String propertyFile) {
+//		this.propertyFile = propertyFile;
+//	}
+	
 	/**
-	 * This constructor creates an instance of MainController object.
-	 * @param propertyFile the property file name.
+	 * private constructor for implementing singleton pattern
 	 */
-	public MainController(String propertyFile) {
-		this.propertyFile = propertyFile;
+	private MainController(){
+		
 	}
+
+	
+	/**
+	 * Static method for accessing MainController instance
+	 */
+	public static MainController getInstance()
+	{
+		if(mainCtrl == null)
+		{
+			mainCtrl = new MainController();
+			return mainCtrl;
+		}
+		return mainCtrl;
+	}
+	
+/**
+ * Method to initialize property file
+ * @param propFile
+ */
+	public void initializeProperty(String propFile)
+	{
+		this.propertyFile = propFile;
+	}
+	
 
 	/**
 	 * This method will initiate the creation of all the control objects necessary for
