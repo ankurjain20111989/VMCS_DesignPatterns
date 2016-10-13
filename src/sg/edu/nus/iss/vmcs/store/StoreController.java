@@ -27,8 +27,8 @@ import java.io.IOException;
  * @author Olivo Miotto, Pang Ping Li
  */
 public class StoreController {
-	private Store cStore,dStore;
-	private StoreFactory sFactory;
+	private CashStore cStore;
+	private DrinksStore dStore;
 
 	private PropertyLoader cashLoader;
 	private PropertyLoader drinksLoader;
@@ -50,9 +50,8 @@ public class StoreController {
 	 * @throws IOException if fail to initialize stores; reading properties.
 	 */
 	public void initialize() throws IOException {
-		sFactory = new StoreFactory();
-		cStore = sFactory.getStore("cash");
-		dStore = sFactory.getStore("drinks");
+		cStore = new CashStore();
+		dStore = new DrinksStore();
 		initializeStores();
 	}
 
