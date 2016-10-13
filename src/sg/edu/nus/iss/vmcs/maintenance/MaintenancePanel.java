@@ -274,23 +274,22 @@ public class MaintenancePanel extends Dialog {
 	 *  Not required in requirement&#46;
 	 *  @throws VMCSException if fail to update quantity display.
 	 */
-	//Not required as handled by observer
-	/*public void updateQtyDisplay(int type, int idx, int qty)
+	
+	public void updateQtyDisplay(int type, int idx, int qty)
 		throws VMCSException {
-		System.out.println("update qty inside maintenance being executed");
 		if (type == Store.CASH) {
 			cDisplay.displayQty(idx, qty);
 		} else
 			dDisplay.displayQty(idx, qty);
-	}*/
+	}
 
 	/**
 	 * When transfer all button is pushed, the current display needs to be updated&#46;
 	 * not required in requirement&#46;
 	 * @throws VMCSException if fail to update quantity display.
 	 */
-	//Not required as handled by observer
-	/*public void updateCurrentQtyDisplay(int type, int qty)
+	
+	public void updateCurrentQtyDisplay(int type, int qty)
 		throws VMCSException {
 		int curIdx;
 		if (type == Store.CASH)
@@ -298,7 +297,7 @@ public class MaintenancePanel extends Dialog {
 		else
 			curIdx = dDisplay.getCurIdx();
 		updateQtyDisplay(type, curIdx, qty);
-	}*/
+	}
 
 	/**
 	 * This method initiate the collect cash.

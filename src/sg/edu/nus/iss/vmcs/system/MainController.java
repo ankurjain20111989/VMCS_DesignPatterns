@@ -67,7 +67,6 @@ public class MainController {
  */
 	public void initializeProperty(String propFile)
 	{
-		System.out.println("enter main");
 		this.propertyFile = propFile;
 	}
 	
