@@ -32,22 +32,7 @@ public class CashStore extends Store {
 	 */
 	public CashStore() {
 	}
-	
-	/**
-	 * This method find and returns the index of the coin in the CashStore of the given Coin&#46;
-	 * @param c the Coin of interest&#46;
-	 * @return the index of the given Coin&#46; Return -1 if unknown Coin is detected.
-	 */
-	public int findCashStoreIndex (Coin c) {
-		int size = getStoreSize();
-		for (int i = 0; i < size; i++) {
-			StoreItem item = (CashStoreItem) getStoreItem(i);
-			Coin current = (Coin) item.getContent();
-			if (current.getWeight() == c.getWeight())
-				return i;
-		}
-		return -1;
-	}
+
 
 	/**
 	 * This method determine whether the given weight of the {@link Coin} is valid.
