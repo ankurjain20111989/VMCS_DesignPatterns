@@ -7,6 +7,8 @@
  */
 package sg.edu.nus.iss.vmcs.store;
 
+import javafx.beans.InvalidationListener;
+import java.util.Observable;
 /**
  * This entity object implements a generic storage item class&#46; It performs actions like;
  * returning content (Store Item identification), setting quantity, returning quantity,
@@ -24,8 +26,11 @@ package sg.edu.nus.iss.vmcs.store;
  * 
  * @version 3.0 5/07/2003
  * @author Olivo Miotto, Pang Ping Li
+ * @author agarwal.puja
  */
-public class StoreItem {
+
+//Observer Design Pattern - Subject/Observable
+public class StoreItem extends Observable{
 	private StoreObject content;
 	private int quantity;
 
@@ -59,10 +64,15 @@ public class StoreItem {
 	 * This method sets the total number of StoreItem held.
 	 * @param quantity the number of StoreItem.
 	 */
+	// Set operations call the Observable's methods: setChanged() and notifyObeservers() 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+		// Implementing the Observer pattern
+		// - the following methods are implemented in the class java.util.Observable
+		setChanged();
+		notifyObservers();
 	}
-
+	
 	/**
 	 * This method returns the total number of StoreItem held&#46;
 	 * @return the number of StoreItem.&#46;
@@ -81,16 +91,28 @@ public class StoreItem {
 	/**
 	 * This method decrease the quantity by 1 but not less than 0.
 	 */
+	// Set operations call the Observable's methods: setChanged() and notifyObeservers() 
 	public void decrement() {
 		quantity--;
-		if (quantity < 0)
+		if (quantity < 0){
 			quantity = 0;
+		}
+		// Implementing the Observer pattern
+		// - the following methods are implemented in the class java.util.Observable
+		setChanged();
+		notifyObservers();
 	}
 
 	/**
 	 * This method increase the quantity by 1.
 	 */
+	// Set operations call the Observable's methods: setChanged() and notifyObeservers() 
 	public void increment() {
 		quantity++;
+		// Implementing the Observer pattern
+		// - the following methods are implemented in the class java.util.Observable
+		setChanged();
+		notifyObservers();
 	}
+
 }//End of class StoreItem

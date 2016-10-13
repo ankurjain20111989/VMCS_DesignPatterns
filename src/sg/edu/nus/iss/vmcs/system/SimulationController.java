@@ -25,10 +25,9 @@ public class SimulationController {
 
 	/**
 	 * This constructor creates an instance of the SimulationController object.
-	 * @param ctrl the MainController.
 	 */
-	public SimulationController(MainController ctrl) {
-		mCtrl = ctrl;
+	public SimulationController() {
+		mCtrl = MainController.getInstance();
 		scp = new SimulatorControlPanel(this);
 	}
 
@@ -112,13 +111,13 @@ public class SimulationController {
 			machCtrl.displayMachineryPanel();
 
 			// display drink stock;
-			machCtrl.displayDrinkStock();
+			//machCtrl.displayDrinkStock();
 
 			// display coin quantity;
-			machCtrl.displayCoinStock();
+			//machCtrl.displayCoinStock();
 
 			machCtrl.displayDoorState();
-		} catch (VMCSException e) {
+		} catch (Exception e) {
 			System.out.println("SimulationController.setupSimulator:" + e);
 		}
 	}

@@ -9,15 +9,20 @@ package sg.edu.nus.iss.vmcs.machinery;
 
 import sg.edu.nus.iss.vmcs.system.*;
 import sg.edu.nus.iss.vmcs.util.*;
+
+import java.util.Collection;
+import java.util.Observable;
+import java.util.Observer;
 import sg.edu.nus.iss.vmcs.store.*;
 
 /**
  * This object controls the Change State use case.
  *
  * @version 3.0 5/07/2003
- * @author Olivo Miotto, Pang Ping Li
+ * @author Olivo Miotto, Pang Ping Li, agarwal.puja
  */
-public class MachineryController {
+//Observer Design Pattern - Observer
+public class MachineryController implements Observer{
 	/**This attribute reference to the MainController*/
 	public MainController mainCtrl;
 	/**This attribute reference to the StoreController*/
@@ -28,11 +33,12 @@ public class MachineryController {
 
 	/**
 	 * This constructor creates an instance of MachineryController.
-	 * @param mctrl the MainController.
 	 */
-	public MachineryController(MainController mctrl) {
-		mainCtrl = mctrl;
-		storeCtrl = mctrl.getStoreController();
+	public MachineryController() {
+		mainCtrl = MainController.getInstance();
+		storeCtrl = MainController.getInstance().getStoreController();
+		addToDrinkObservable(storeCtrl.getStoreItems(Store.DRINK));
+		addToCoinObservable(storeCtrl.getStoreItems(Store.CASH));
 	}
 
 	/**
@@ -163,9 +169,10 @@ public class MachineryController {
 	 * @throws VMCSException if fail to update cash store display.
 	 */
 	public void storeCoin(Coin c) throws VMCSException {
+		System.out.println("store coin in mach ctrl being executed");
 		storeCtrl.storeCoin(c);
-		if (ml != null)
-			ml.getCashStoreDisplay().update();
+		/*if (ml != null)
+			ml.getCashStoreDisplay().update();*/
 	}
 
 	/**
@@ -176,24 +183,25 @@ public class MachineryController {
 	 * @throws VMCSException if fail to update cash store display.
 	 */
 	public void dispenseDrink(int idx) throws VMCSException {
+		System.out.println("dispense drink in mach ctrl being executed");
 		storeCtrl.dispenseDrink(idx);
-		if (ml != null)
-			ml.getCashStoreDisplay().update();
+		/*if (ml != null)
+			ml.getCashStoreDisplay().update();*/
 
 	}
 
 	/**
 	 * This method instructs the CashStore to issue a number of coins of a specific
-	 * denomination, and hen updates the MachinerySimulatorPanel&#46; It returns 
-	 * TRUE or FALSE to indiate whether the change issue was successful.
+	 * denomination, and then updates the MachinerySimulatorPanel&#46; It returns 
+	 * TRUE or FALSE to indicate whether the change issue was successful.
 	 * @param idx the index of the cash store item.
 	 * @param numOfCoins the number of coins to change.
 	 * @throws VMCSException if fail to update cash store display.
 	 */
 	public void giveChange(int idx, int numOfCoins) throws VMCSException {
 		storeCtrl.giveChange(idx, numOfCoins);
-		if (ml != null)
-			ml.getCashStoreDisplay().update();
+		/*if (ml != null)
+			ml.getCashStoreDisplay().update();*/
 	}
 	
 	/**
@@ -204,4 +212,36 @@ public class MachineryController {
 			ml.refresh();
 		}
 	}
+	
+	/**
+	 * This method adds this to observer list
+	 */
+	// Add this(observer) to all the store items - drinks (subjects)
+	private void addToDrinkObservable(StoreItem[] storeItems){
+		for(StoreItem item : storeItems)  
+			item.addObserver(this);
+	}
+	
+	/**
+	 * This method adds this to observer list
+	 */
+	// Add this(observer) to all the store items - coins (subjects)
+	private void addToCoinObservable(StoreItem[] storeItems){
+		for(StoreItem item : storeItems)  
+			item.addObserver(this);
+	}
+
+	/**
+	 * update function to refresh the display items associated with it
+	 */
+	// Implementing the Observer pattern
+	// - the following method is declared in the interface java.util.Observer
+	@Override
+	public void update(Observable storeItem, Object obj) {
+		System.out.println("Quantity Observer being executed");
+		if(ml != null){
+			ml.refresh();
+		}	
+	}
+	
 }//End of class MachineryController

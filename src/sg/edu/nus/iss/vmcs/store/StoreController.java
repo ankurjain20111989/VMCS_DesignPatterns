@@ -219,7 +219,7 @@ public class StoreController {
 	 */
 	public int transferAll()  {
 		int i;
-		int cc = 0; // coin quauntity;
+		int cc = 0; // coin quantity;
 		int size = cStore.getStoreSize();
 
 		CashStoreItem item;

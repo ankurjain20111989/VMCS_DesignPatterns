@@ -30,7 +30,7 @@ public class MainController {
 	
 	private static MainController mainCtrl;
 
-	private String      propertyFile;
+	private String propertyFile;
 
 //	/**
 //	 * This constructor creates an instance of MainController object.
@@ -67,6 +67,7 @@ public class MainController {
  */
 	public void initializeProperty(String propFile)
 	{
+		System.out.println("enter main");
 		this.propertyFile = propFile;
 	}
 	
@@ -102,11 +103,13 @@ public class MainController {
 			drinksLoader.initialize();
 			storeCtrl = new StoreController(cashLoader, drinksLoader);
 			storeCtrl.initialize();
-			simulatorCtrl = new SimulationController(this);
-			machineryCtrl = new MachineryController(this);
+			
+			//Remove 'this' reference while creating the controllers
+			simulatorCtrl = new SimulationController();
+			machineryCtrl = new MachineryController();
 			machineryCtrl.initialize();
-			maintenanceCtrl = new MaintenanceController(this);
-			txCtrl=new TransactionController(this);
+			maintenanceCtrl = new MaintenanceController();
+			txCtrl=new TransactionController();
 		} catch (IOException e) {
 			throw new VMCSException(
 				"MainController.initialize",

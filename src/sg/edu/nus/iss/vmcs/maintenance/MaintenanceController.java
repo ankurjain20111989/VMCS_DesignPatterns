@@ -27,17 +27,17 @@ import sg.edu.nus.iss.vmcs.util.VMCSException;
  * @version 3.0 5/07/2003
  * @author Olivo Miotto, Pang Ping Li
  */
-public class MaintenanceController {
+
+public class MaintenanceController{
 	private MainController mCtrl;
 	private MaintenancePanel mpanel;
 	private AccessManager am;
 
 	/**
 	 * This constructor creates an instance of the MaintenanceController.
-	 * @param mctrl the MainController.
 	 */
-	public MaintenanceController(MainController mctrl) {
-		mCtrl = mctrl;
+	public MaintenanceController() {
+		mCtrl = MainController.getInstance();
 		am = new AccessManager(this);
 	}
 
@@ -169,20 +169,20 @@ public class MaintenanceController {
 	 */
 	public void transferAll() {
 		StoreController sctrl = mCtrl.getStoreController();
-		MachineryController machctrl = mCtrl.getMachineryController();
+		//MachineryController machctrl = mCtrl.getMachineryController();
 
 		int cc; // coin quantity;
 
-		try {
+		//try {
 			cc = sctrl.transferAll();
 			mpanel.displayCoins(cc);
-			machctrl.displayCoinStock();
+			//machctrl.displayCoinStock();
 			// the cash qty current is displayed in the Maintenance panel needs to be update to be 0;
 			// not required.
-			mpanel.updateCurrentQtyDisplay(Store.CASH, 0);
-		} catch (VMCSException e) {
-			System.out.println("MaintenanceController.transferAll:" + e);
-		}
+			//mpanel.updateCurrentQtyDisplay(Store.CASH, 0);
+		//} catch (Exception e) {
+			//System.out.println("MaintenanceController.transferAll:" + e);
+		//}
 	}
 
 	/**
@@ -191,7 +191,8 @@ public class MaintenanceController {
 	 * @param idx the index of the StoreItem.
 	 * @param qty the quantity of the StoreItem.
 	 */
-	public void changeStoreQty(char type, int idx, int qty) {
+	//Not required as handled by observer
+	/*public void changeStoreQty(char type, int idx, int qty) {
 		//StoreController sctrl = mCtrl.getStoreController();
 		try {
 			mpanel.updateQtyDisplay(type, idx, qty);
@@ -200,7 +201,7 @@ public class MaintenanceController {
 		} catch (VMCSException e) {
 			System.out.println("MaintenanceController.changeStoreQty:" + e);
 		}
-	}
+	}*/
 
 	/**
 	 * When the MaintenanceController receives a message saying that the Maintainer
@@ -249,4 +250,5 @@ public class MaintenanceController {
 		if (mpanel != null)
 			mpanel.closeDown();
 	}
+
 }//End of class MaintenanceController

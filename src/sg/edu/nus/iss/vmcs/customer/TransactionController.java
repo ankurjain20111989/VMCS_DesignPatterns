@@ -47,10 +47,9 @@ public class TransactionController {
 	
 	/**
 	 * This constructor creates an instance of the TransactionController.
-	 * @param mainCtrl the MainController.
 	 */
-	public TransactionController(MainController mainCtrl) {
-		this.mainCtrl = mainCtrl;
+	public TransactionController() {
+		this.mainCtrl = MainController.getInstance();
 		dispenseCtrl=new DispenseController(this);
 		coinReceiver=new CoinReceiver(this);
 		changeGiver=new ChangeGiver(this);
