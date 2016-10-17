@@ -7,6 +7,8 @@
  */
 package sg.edu.nus.iss.vmcs.store;
 
+import sg.edu.nus.iss.vcms.interfaces.IStore;
+
 /**
  * This entity object implements a generic Store&#46; It has methods to load (add) {@link StoreItem}
  * into the Store and release {@link StoreItem} from the Store.
@@ -24,7 +26,7 @@ package sg.edu.nus.iss.vmcs.store;
  * @version 3.0 5/07/2003
  * @author Olivo Miotto, Pang Ping Li
  */
-public abstract class Store {
+public abstract class Store implements IStore {
 	/**This constant attribute represent Cash*/
 	public final static int CASH  = 1;
 	/**This constant attribute represnet Drink*/
