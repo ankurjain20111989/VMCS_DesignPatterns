@@ -169,7 +169,6 @@ public class MachineryController implements Observer{
 	 * @throws VMCSException if fail to update cash store display.
 	 */
 	public void storeCoin(Coin c) throws VMCSException {
-		System.out.println("store coin in mach ctrl being executed");
 		storeCtrl.storeCoin(c);
 		/*if (ml != null)
 			ml.getCashStoreDisplay().update();*/
@@ -183,7 +182,6 @@ public class MachineryController implements Observer{
 	 * @throws VMCSException if fail to update cash store display.
 	 */
 	public void dispenseDrink(int idx) throws VMCSException {
-		System.out.println("dispense drink in mach ctrl being executed");
 		storeCtrl.dispenseDrink(idx);
 		/*if (ml != null)
 			ml.getCashStoreDisplay().update();*/
@@ -238,10 +236,15 @@ public class MachineryController implements Observer{
 	// - the following method is declared in the interface java.util.Observer
 	@Override
 	public void update(Observable storeItem, Object obj) {
-		System.out.println("Quantity Observer being executed");
-		if(ml != null){
-			ml.refresh();
-		}	
+		StoreItem var = (StoreItem) storeItem;
+		if(var instanceof DrinksStoreItem){
+			System.out.println("Machinery Observer called - drinks");
+			ml.getDrinksStoreDisplay().update();
+		}
+		else{
+			System.out.println("Machinery Observer called - coin");
+			ml.getCashStoreDisplay().update();
+		}		
 	}
 	
 }//End of class MachineryController

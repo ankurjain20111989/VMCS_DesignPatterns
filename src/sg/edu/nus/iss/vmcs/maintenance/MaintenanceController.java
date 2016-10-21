@@ -274,13 +274,14 @@ public class MaintenanceController implements Observer{
 	// - the following method is declared in the interface java.util.Observer
 	@Override
 	public void update(Observable storeItem, Object obj) {
-		System.out.println("Enter Maintenance Observer");
 		try {
 			StoreItem var = (StoreItem) storeItem;
 			if(var instanceof DrinksStoreItem){
+				System.out.println("Maintenance Observer called - drinks");
 				mpanel.updateCurrentQtyDisplay(Store.DRINK, var.getQuantity());
 			}
 			else{
+				System.out.println("Maintenance Observer called - coins");
 				mpanel.updateCurrentQtyDisplay(Store.CASH, var.getQuantity());
 			}		
 		} catch (VMCSException e) {
