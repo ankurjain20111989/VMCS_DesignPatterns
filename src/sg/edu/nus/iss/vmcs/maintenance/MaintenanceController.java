@@ -277,12 +277,16 @@ public class MaintenanceController implements Observer{
 		try {
 			StoreItem var = (StoreItem) storeItem;
 			if(var instanceof DrinksStoreItem){
-				System.out.println("Maintenance Observer called - drinks");
-				mpanel.updateCurrentQtyDisplay(Store.DRINK, var.getQuantity());
+				if(mpanel != null){
+					System.out.println("Maintenance Observer called - drink: "+var.getContent().getName()+" quantity changed to: "+var.getQuantity());
+					mpanel.updateCurrentQtyDisplay(Store.DRINK, var.getQuantity());
+				}
 			}
 			else{
-				System.out.println("Maintenance Observer called - coins");
-				mpanel.updateCurrentQtyDisplay(Store.CASH, var.getQuantity());
+				if(mpanel != null){
+					System.out.println("Maintenance Observer called - coins: "+var.getContent().getName()+" quantity changed to: "+var.getQuantity());
+					mpanel.updateCurrentQtyDisplay(Store.CASH, var.getQuantity());
+				}
 			}		
 		} catch (VMCSException e) {
 			// TODO Auto-generated catch block

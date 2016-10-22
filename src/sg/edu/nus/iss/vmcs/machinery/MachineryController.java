@@ -238,12 +238,16 @@ public class MachineryController implements Observer{
 	public void update(Observable storeItem, Object obj) {
 		StoreItem var = (StoreItem) storeItem;
 		if(var instanceof DrinksStoreItem){
-			System.out.println("Machinery Observer called - drinks");
-			ml.getDrinksStoreDisplay().update();
+			if(ml != null){
+				System.out.println("Machinery Observer called - drinks: "+var.getContent().getName()+" quantity changed to: "+var.getQuantity());
+				ml.getDrinksStoreDisplay().update();
+			}
 		}
 		else{
-			System.out.println("Machinery Observer called - coin");
-			ml.getCashStoreDisplay().update();
+			if(ml != null){
+				System.out.println("Machinery Observer called - coin: "+var.getContent().getName()+" quantity changed to: "+var.getQuantity());
+				ml.getCashStoreDisplay().update();
+			}
 		}		
 	}
 	
