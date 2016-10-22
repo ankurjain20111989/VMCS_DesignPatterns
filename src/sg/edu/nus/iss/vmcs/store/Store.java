@@ -26,7 +26,7 @@ import sg.edu.nus.iss.vcms.interfaces.IStore;
  * @version 3.0 5/07/2003
  * @author Olivo Miotto, Pang Ping Li
  */
-public abstract class Store implements IStore, Iterator {
+public abstract class Store implements IStore {
 	/**This constant attribute represent Cash*/
 	public final static int CASH  = 1;
 	/**This constant attribute represnet Drink*/
@@ -98,8 +98,10 @@ public abstract class Store implements IStore, Iterator {
 		String en;
 //		StoreObject so;
 //		int i;
+		StoreItemRepository stirep = new StoreItemRepository();
+		Iterator stiItr = stirep.getIterator(items);
 
-		StoreIterator <StoreItem> stiItr = new StoreIterator(items);
+		//StoreIterator <StoreItem> stiItr = new StoreIterator(items);
 		while (stiItr.hasNext()){
 			if(stiItr.getCurrent()!=null)
 			{

@@ -32,15 +32,5 @@ public class DrinksStore extends Store {
 	public DrinksStore() {
 	}
 
-	@Override
-	public StoreItem next() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public boolean hasNext() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }//End of class DrinksStore

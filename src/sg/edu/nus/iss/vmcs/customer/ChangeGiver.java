@@ -9,9 +9,11 @@ package sg.edu.nus.iss.vmcs.customer;
 
 import sg.edu.nus.iss.vmcs.store.CashStoreItem;
 import sg.edu.nus.iss.vmcs.store.Coin;
+import sg.edu.nus.iss.vmcs.store.Iterator;
 import sg.edu.nus.iss.vmcs.store.Store;
 import sg.edu.nus.iss.vmcs.store.StoreController;
 import sg.edu.nus.iss.vmcs.store.StoreItem;
+import sg.edu.nus.iss.vmcs.store.StoreItemRepository;
 import sg.edu.nus.iss.vmcs.system.MainController;
 import sg.edu.nus.iss.vmcs.util.VMCSException;
 
@@ -91,13 +93,24 @@ public class ChangeGiver {
 		MainController mainCtrl=txCtrl.getMainController();
 		StoreController storeCtrl=mainCtrl.getStoreController();
 		StoreItem[] cashStoreItems=storeCtrl.getStore(Store.CASH).getItems();
-		for(int i=0;i<cashStoreItems.length;i++){
-			StoreItem storeItem=cashStoreItems[i];
+		Iterator itr = new StoreItemRepository().getIterator(cashStoreItems);
+		while(itr.hasNext())
+		{
+			StoreItem storeItem=itr.getCurrent();
 			CashStoreItem cashStoreItem=(CashStoreItem)storeItem;
 			int quantity=cashStoreItem.getQuantity();
 			if(quantity==0)
 				isAnyDenoEmpty=true;
+			itr.next();
 		}
+		
+//		for(int i=0;i<cashStoreItems.length;i++){
+//			StoreItem storeItem=cashStoreItems[i];
+//			CashStoreItem cashStoreItem=(CashStoreItem)storeItem;
+//			int quantity=cashStoreItem.getQuantity();
+//			if(quantity==0)
+//				isAnyDenoEmpty=true;
+//		}
 		custPanel.displayChangeStatus(isAnyDenoEmpty);
 	}
 }//End of class ChangeGiver
