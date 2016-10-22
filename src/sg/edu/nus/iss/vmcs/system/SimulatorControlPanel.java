@@ -50,11 +50,11 @@ public class SimulatorControlPanel extends Frame {
 
     private static final String title = "Simulation Control Panel";
 
-    private static final String L_SIMUL_BEGIN    = "Begin Simulation";
-    private static final String L_SIMUL_END      = "End Simulation";
-    private static final String L_ACT_MAINTAINER = "Activate Maintainer Panel";
-    private static final String L_ACT_MACHINERY  = "Activate Machinery Panel";
-    private static final String L_ACT_CUSTOMER  = "Activate Customer Panel";
+    public  static final String L_SIMUL_BEGIN    = "Begin Simulation";
+    public  static final String L_SIMUL_END      = "End Simulation";
+    public  static final String L_ACT_MAINTAINER = "Activate Maintainer Panel";
+    public  static final String L_ACT_MACHINERY  = "Activate Machinery Panel";
+    public  static final String L_ACT_CUSTOMER  = "Activate Customer Panel";
 
     private MainController          mainCtrl;
     private SimulationController    simulationCtrl;
@@ -79,15 +79,15 @@ public class SimulatorControlPanel extends Frame {
         add (createPanelLabel());
 
         addButton(SIMUL_BEGIN, L_SIMUL_BEGIN,
-		          new BeginSimulationButtonListener(simulationCtrl));
+        		new SimulationListener(simulationCtrl));
         addButton(ACT_CUSTOMER,  L_ACT_CUSTOMER,
-		          new ActivateCustomerPanelButtonListener(simulationCtrl));
+        		new SimulationListener(simulationCtrl));
         addButton(ACT_MAINTAINER, L_ACT_MAINTAINER,
-		          new ActivateMaintainerPanelButtonListener(simulationCtrl));
+        		new SimulationListener(simulationCtrl));
         addButton(ACT_MACHINERY,  L_ACT_MACHINERY,
-		          new ActivateMachineryPanelButtonListener(simulationCtrl));
+        		new SimulationListener(simulationCtrl));  
         addButton(SIMUL_END,  L_SIMUL_END,
-		          new EndSimulationButtonListener(mainCtrl));
+		          new MainContollerListener(mainCtrl));
 
         pack();
         frameWidth=this.getWidth();
