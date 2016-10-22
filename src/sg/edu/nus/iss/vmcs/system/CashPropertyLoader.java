@@ -9,7 +9,9 @@ package sg.edu.nus.iss.vmcs.system;
 
 
 
-import sg.edu.nus.iss.vmcs.store.*;
+import sg.edu.nus.iss.vmcs.store.CashStoreItem;
+import sg.edu.nus.iss.vmcs.store.Coin;
+import sg.edu.nus.iss.vmcs.store.StoreItem;
 
 /**
  * This control object manages the initialization of the CashStore&#46;
