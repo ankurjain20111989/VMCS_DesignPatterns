@@ -13,7 +13,6 @@ import sg.edu.nus.iss.vmcs.store.Iterator;
 import sg.edu.nus.iss.vmcs.store.Store;
 import sg.edu.nus.iss.vmcs.store.StoreController;
 import sg.edu.nus.iss.vmcs.store.StoreItem;
-import sg.edu.nus.iss.vmcs.store.StoreItemRepository;
 import sg.edu.nus.iss.vmcs.system.MainController;
 import sg.edu.nus.iss.vmcs.util.VMCSException;
 
@@ -92,16 +91,16 @@ public class ChangeGiver {
 		boolean isAnyDenoEmpty=false;
 		MainController mainCtrl=txCtrl.getMainController();
 		StoreController storeCtrl=mainCtrl.getStoreController();
-		StoreItem[] cashStoreItems=storeCtrl.getStore(Store.CASH).getItems();
-		Iterator itr = new StoreItemRepository().getIterator(cashStoreItems);
-		while(itr.hasNext())
+		Iterator cashStoreItems=storeCtrl.getStore(Store.CASH).getItems();
+		cashStoreItems.reset();
+		while(cashStoreItems.hasNext())
 		{
-			StoreItem storeItem=itr.getCurrent();
+			StoreItem storeItem=cashStoreItems.getCurrent();
 			CashStoreItem cashStoreItem=(CashStoreItem)storeItem;
 			int quantity=cashStoreItem.getQuantity();
 			if(quantity==0)
 				isAnyDenoEmpty=true;
-			itr.next();
+			cashStoreItems.next();
 		}
 		
 //		for(int i=0;i<cashStoreItems.length;i++){

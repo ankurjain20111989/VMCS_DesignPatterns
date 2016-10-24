@@ -30,7 +30,7 @@ public class ButtonItemDisplay extends Panel {
 	 * @param sitem the array of StoreObject.
 	 * @param length the length of StoreObject array.
 	 */
-	public ButtonItemDisplay(String title, StoreItem sitem[], int length) {
+	public ButtonItemDisplay(String title, Iterator sitem, int length) {
 
 		len = length;
 		Panel tp1 = new Panel();
@@ -42,11 +42,13 @@ public class ButtonItemDisplay extends Panel {
 
 		this.add(tp1);
 
-		int i;
+		int i=0;
 		items = new ButtonItem[len];
-
-		for (i = 0; i < len; i++) {
-			StoreObject ob = sitem[i].getContent();
+		
+		sitem.reset();
+		while(sitem.hasNext())
+		{
+			StoreObject ob = sitem.getCurrent().getContent();
 
 			items[i] =
 				new ButtonItem(
@@ -54,7 +56,20 @@ public class ButtonItemDisplay extends Panel {
 					ButtonItem.DEFAULT_LEN,
 					ButtonItem.GRID);
 			this.add(items[i]);
+			i+=1;
+			sitem.next();
 		}
+
+//		for (i = 0; i < len; i++) {
+//			StoreObject ob = sitem[i].getContent();
+//
+//			items[i] =
+//				new ButtonItem(
+//					ob.getName(),
+//					ButtonItem.DEFAULT_LEN,
+//					ButtonItem.GRID);
+//			this.add(items[i]);
+//		}
 	}
 
 	/**

@@ -16,9 +16,11 @@ import sg.edu.nus.iss.vmcs.machinery.MachineryController;
 import sg.edu.nus.iss.vmcs.store.CashStoreItem;
 import sg.edu.nus.iss.vmcs.store.DrinksBrand;
 import sg.edu.nus.iss.vmcs.store.DrinksStoreItem;
+import sg.edu.nus.iss.vmcs.store.Iterator;
 import sg.edu.nus.iss.vmcs.store.Store;
 import sg.edu.nus.iss.vmcs.store.StoreController;
 import sg.edu.nus.iss.vmcs.store.StoreItem;
+import sg.edu.nus.iss.vmcs.store.StoreItemIterator;
 import sg.edu.nus.iss.vmcs.system.MainController;
 import sg.edu.nus.iss.vmcs.system.SimulatorControlPanel;
 import sg.edu.nus.iss.vmcs.util.MessageDialog;
@@ -253,18 +255,32 @@ public class MaintenanceController implements Observer{
 	 * This method adds this to observer list
 	 */
 	// Add this(observer) to all the store items - drinks (subjects)
-	private void addToDrinkObservable(StoreItem[] storeItems){
-		for(StoreItem item : storeItems)  
-			item.addObserver(this);
+	private void addToDrinkObservable(Iterator storeItems){
+		storeItems.reset();
+		while(storeItems.hasNext())
+		{
+			storeItems.getCurrent().addObserver(this);
+			storeItems.next();
+		}
+		
+		
+//		for(StoreItem item : storeItems)  
+//			item.addObserver(this);
 	}
 
 	/**
 	 * This method adds this to observer list
 	 */
 	// Add this(observer) to all the store items - coins (subjects)
-	private void addToCoinObservable(StoreItem[] storeItems){
-		for(StoreItem item : storeItems)  
-			item.addObserver(this);
+	private void addToCoinObservable(Iterator storeItems){
+		storeItems.reset();
+		while(storeItems.hasNext())
+		{
+			storeItems.getCurrent().addObserver(this);
+			storeItems.next();
+		}
+//		for(StoreItem item : storeItems)  
+//			item.addObserver(this);
 	}
 	
 	/**

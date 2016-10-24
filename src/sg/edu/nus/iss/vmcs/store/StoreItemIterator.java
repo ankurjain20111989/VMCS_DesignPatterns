@@ -3,22 +3,13 @@ package sg.edu.nus.iss.vmcs.store;
 import java.util.Arrays;
 import java.util.List;
 
-public class StoreItemRepository implements StoreItemContainer{
-
-	@Override
-	public Iterator getIterator(StoreItem[] o) {
-		// TODO Auto-generated method stub
-		return new StoreItemIterator(o);
-	}
-	
-	
-	private class StoreItemIterator implements Iterator {
+public class StoreItemIterator implements Iterator {
 		/**This attribute hold the size of the store*/
 		//protected int size;
 		
 		/**This attribute hold the items of the store*/
-		protected List<StoreItem> items;
-		private StoreItem next;
+		private List<StoreItem> items;
+		private int next;
 		
 		
 		/**
@@ -28,23 +19,17 @@ public class StoreItemRepository implements StoreItemContainer{
 		public StoreItemIterator(StoreItem[] itemn) {
 			items =  (List<StoreItem>) Arrays.asList(itemn);
 			//items = new StoreItem[size];
-			next = items.get(0);
+			next = 0;
 		}
 		
 		public boolean hasNext()
 		{
-			if(items.indexOf(next)+1 < items.size())
-			{
-				return true;
-			}
-			return false;
+			return next < items.size();
 		}
 		
-		public StoreItem next()
+		public void next() 
 		{
-			next = items.get(items.indexOf(next)+1);
-			return next;
-			//return items.iterator().next();
+			next++;
 		}
 		
 		public boolean has(StoreItem i)
@@ -54,10 +39,14 @@ public class StoreItemRepository implements StoreItemContainer{
 		
 		public StoreItem getCurrent()
 		{
-			return next;
+			return items.get(next);
+		}
+
+		@Override
+		public void reset() {
+			next=0;
+			
 		}
 	}
 
 
-
-}

@@ -215,18 +215,32 @@ public class MachineryController implements Observer{
 	 * This method adds this to observer list
 	 */
 	// Add this(observer) to all the store items - drinks (subjects)
-	private void addToDrinkObservable(StoreItem[] storeItems){
-		for(StoreItem item : storeItems)  
-			item.addObserver(this);
+	private void addToDrinkObservable(Iterator storeItems){
+		storeItems.reset();
+		while(storeItems.hasNext())
+		{
+			storeItems.getCurrent().addObserver(this);
+			storeItems.next();
+		}
+//		for(StoreItem item : storeItems)  
+			
 	}
 	
 	/**
 	 * This method adds this to observer list
 	 */
 	// Add this(observer) to all the store items - coins (subjects)
-	private void addToCoinObservable(StoreItem[] storeItems){
-		for(StoreItem item : storeItems)  
-			item.addObserver(this);
+	private void addToCoinObservable(Iterator storeItems){
+		storeItems.reset();
+		while(storeItems.hasNext())
+		{
+			storeItems.getCurrent().addObserver(this);
+			storeItems.next();
+		}
+		
+		
+//		for(StoreItem item : storeItems)  
+//			item.addObserver(this);
 	}
 
 	/**

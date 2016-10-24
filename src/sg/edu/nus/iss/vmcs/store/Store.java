@@ -7,7 +7,6 @@
  */
 package sg.edu.nus.iss.vmcs.store;
 
-import sg.edu.nus.iss.vcms.interfaces.IStore;
 
 /**
  * This entity object implements a generic Store&#46; It has methods to load (add) {@link StoreItem}
@@ -26,7 +25,7 @@ import sg.edu.nus.iss.vcms.interfaces.IStore;
  * @version 3.0 5/07/2003
  * @author Olivo Miotto, Pang Ping Li
  */
-public abstract class Store implements IStore {
+public abstract class Store implements StoreItemContainer {
 	/**This constant attribute represent Cash*/
 	public final static int CASH  = 1;
 	/**This constant attribute represnet Drink*/
@@ -64,8 +63,8 @@ public abstract class Store implements IStore {
 	 * This method returns the {@link StoreItem} corresponding to the index entered.
 	 * @return the array of {@link StoreItem}.
 	 */
-	public StoreItem[] getItems() {
-		return items;
+	public Iterator getItems() {
+		return new StoreItemIterator(items);
 	}
 
 	/**
@@ -98,8 +97,8 @@ public abstract class Store implements IStore {
 		String en;
 //		StoreObject so;
 //		int i;
-		StoreItemRepository stirep = new StoreItemRepository();
-		Iterator stiItr = stirep.getIterator(items);
+		Iterator stiItr = new StoreItemIterator(items);
+		//Iterator stiItr = stirep.getIterator(items);
 
 		//StoreIterator <StoreItem> stiItr = new StoreIterator(items);
 		while (stiItr.hasNext()){
@@ -161,5 +160,11 @@ public abstract class Store implements IStore {
 		}
 		return -1;
 	}
+	
+	@Override
+	public Iterator getIterator() {
+		return new StoreItemIterator(items);
+	}
+
 
 }//End of class Store

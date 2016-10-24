@@ -15,6 +15,7 @@ import java.awt.Panel;
 import sg.edu.nus.iss.vmcs.store.CashStore;
 import sg.edu.nus.iss.vmcs.store.CashStoreItem;
 import sg.edu.nus.iss.vmcs.store.Coin;
+import sg.edu.nus.iss.vmcs.store.Iterator;
 import sg.edu.nus.iss.vmcs.store.Store;
 import sg.edu.nus.iss.vmcs.store.StoreController;
 import sg.edu.nus.iss.vmcs.store.StoreItem;
@@ -41,14 +42,18 @@ public class CoinInputBox extends Panel{
 		MainController mainCtrl=cctrl.getMainController();
 		StoreController storeCtrl=mainCtrl.getStoreController();
 		int cashStoreSize=storeCtrl.getStoreSize(Store.CASH);
-		StoreItem[] cashStoreItems=storeCtrl.getStore(Store.CASH).getItems();
+		Iterator cashStoreItems=storeCtrl.getStore(Store.CASH).getItems();
 		
 		btnCoinButton=new CoinButton[cashStoreSize+1];
 		CoinInputListener coinInputListener=new CoinInputListener(txCtrl.getCoinReceiver());
 		
 		setLayout(new GridBagLayout());
-		for(int i=0;i<cashStoreItems.length;i++){
-			StoreItem storeItem=cashStoreItems[i];
+		
+		cashStoreItems.reset();
+		int i= 0;
+		while(cashStoreItems.hasNext())
+		{
+			StoreItem storeItem=cashStoreItems.getCurrent();
 			CashStoreItem cashStoreItem=(CashStoreItem)storeItem;
 			StoreObject storeObject=cashStoreItem.getContent();
 			Coin coin=(Coin)storeObject;
@@ -60,7 +65,25 @@ public class CoinInputBox extends Panel{
 			add(btnCoinButton[i],new GridBagConstraints(i,1,1,1,1.0,0.0,
 				    GridBagConstraints.EAST,GridBagConstraints.HORIZONTAL,
 				    new Insets(0,0,0,0),10,8));
+			i+=1;
+			cashStoreItems.next();
 		}
+		
+		
+//		for(int i=0;i<cashStoreItems.length;i++){
+//			StoreItem storeItem=cashStoreItems[i];
+//			CashStoreItem cashStoreItem=(CashStoreItem)storeItem;
+//			StoreObject storeObject=cashStoreItem.getContent();
+//			Coin coin=(Coin)storeObject;
+//			String coinName=coin.getName();
+//			int coinValue=coin.getValue();
+//			double coinWeight=coin.getWeight();
+//			btnCoinButton[i]=new CoinButton(coinName,coinValue,coinWeight);
+//			btnCoinButton[i].addActionListener(coinInputListener);
+//			add(btnCoinButton[i],new GridBagConstraints(i,1,1,1,1.0,0.0,
+//				    GridBagConstraints.EAST,GridBagConstraints.HORIZONTAL,
+//				    new Insets(0,0,0,0),10,8));
+//		}
 		btnCoinButton[cashStoreSize]=new CoinButton("Invalid",-1,CashStore.INVALID_COIN_WEIGHT);
 		btnCoinButton[cashStoreSize].addActionListener(coinInputListener);
 		add(btnCoinButton[cashStoreSize],new GridBagConstraints(cashStoreSize,1,1,1,1.0,0.0,
