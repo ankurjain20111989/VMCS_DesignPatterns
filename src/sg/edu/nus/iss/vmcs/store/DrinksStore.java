@@ -33,7 +33,7 @@ public class DrinksStore extends Store {
 	}
 
 	@Override
-	public Iterator getItems() {
+	public Iterator getIterator() {
 		// TODO Auto-generated method stub
 		return new StoreItemIterator(items);
 	}

@@ -141,9 +141,9 @@ public class StoreController {
 	 */
 	public Iterator getStoreItems(int type) {
 		if (type == Store.CASH)
-			return cStore.getItems();
+			return cStore.getIterator();
 		else
-			return dStore.getItems();
+			return dStore.getIterator();
 	}
 
 	/**

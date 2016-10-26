@@ -42,7 +42,7 @@ public class CoinInputBox extends Panel{
 		MainController mainCtrl=cctrl.getMainController();
 		StoreController storeCtrl=mainCtrl.getStoreController();
 		int cashStoreSize=storeCtrl.getStoreSize(Store.CASH);
-		Iterator cashStoreItems=storeCtrl.getStore(Store.CASH).getItems();
+		Iterator cashStoreItems=storeCtrl.getStore(Store.CASH).getIterator();
 		
 		btnCoinButton=new CoinButton[cashStoreSize+1];
 		CoinInputListener coinInputListener=new CoinInputListener(txCtrl.getCoinReceiver());

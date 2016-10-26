@@ -91,7 +91,7 @@ public class ChangeGiver {
 		boolean isAnyDenoEmpty=false;
 		MainController mainCtrl=txCtrl.getMainController();
 		StoreController storeCtrl=mainCtrl.getStoreController();
-		Iterator cashStoreItems=storeCtrl.getStore(Store.CASH).getItems();
+		Iterator cashStoreItems=storeCtrl.getStore(Store.CASH).getIterator();
 		cashStoreItems.reset();
 		while(cashStoreItems.hasNext())
 		{

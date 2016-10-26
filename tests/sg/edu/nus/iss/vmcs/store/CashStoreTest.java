@@ -50,7 +50,7 @@ public class CashStoreTest extends TestCase{
 		storeController.initialize();
 		CashStore cashStore=(CashStore)storeController.getStore(Store.CASH);
 		//Act getItems
-		Iterator storeItems=cashStore.getItems();
+		Iterator storeItems=cashStore.getIterator();
 		//Assert
 //		assertTrue((storeItems==null||storeItems.length>=0));
 	}

@@ -50,7 +50,7 @@ public class DrinksStoreTest extends TestCase{
 		storeController.initialize();
 		DrinksStore drinksStore=(DrinksStore)storeController.getStore(Store.DRINK);
 		//Act getItems
-		Iterator storeItems=drinksStore.getItems();
+		Iterator storeItems=drinksStore.getIterator();
 		//Assert
 //		assertTrue((storeItems==null||storeItems.length>=0));
 	}

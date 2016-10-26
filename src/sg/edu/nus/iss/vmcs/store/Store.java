@@ -64,7 +64,7 @@ public abstract class Store implements StoreItemContainer {
 	 * @return the array of {@link StoreItem}.
 	 */
 	@Override
-	public Iterator getItems() {
+	public Iterator getIterator() {
 		return new StoreItemIterator(items);
 	}
 
