@@ -63,6 +63,7 @@ public abstract class Store implements StoreItemContainer {
 	 * This method returns the {@link StoreItem} corresponding to the index entered.
 	 * @return the array of {@link StoreItem}.
 	 */
+	@Override
 	public Iterator getItems() {
 		return new StoreItemIterator(items);
 	}
@@ -161,10 +162,6 @@ public abstract class Store implements StoreItemContainer {
 		return -1;
 	}
 	
-	@Override
-	public Iterator getIterator() {
-		return new StoreItemIterator(items);
-	}
 
 
 }//End of class Store
